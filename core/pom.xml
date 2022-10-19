@@ -53,7 +53,7 @@
     </dependencies>
 
     <build>
-        <!--        <finalName>analyzer-service</finalName>-->
+        <finalName>person-service-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
