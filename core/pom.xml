@@ -62,11 +62,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
+                <configuration>
+                    <mainClass>liga.medical.medicalpersonservice.core.MedicalPersonServiceApplication</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <id>build-info</id>
                         <goals>
-                            <goal>build-info</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
