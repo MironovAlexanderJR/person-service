@@ -4,9 +4,14 @@ spring:
     username: ${POSTGRES_DB_USERNAME}
     password: ${POSTGRES_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-    initialization-mode: always
-    schema: classpath:init/schema.sql
-    data: classpath:init/data.sql
+#    initialization-mode: always
+#    schema: classpath:init/schema.sql
+#    data: classpath:init/data.sql
   jpa:
     hibernate:
       ddl-auto: none
+  liquibase:
+    change-log: classpath:/db/changelog.xml
+    enabled: ${LIQUIBASE_ENABLE:false}
+
+

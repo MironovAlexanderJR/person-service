@@ -1,6 +1,5 @@
 package liga.medical.medicalpersonservice.core.model;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,22 +8,22 @@ import org.springframework.data.annotation.Id;
 public class PersonData {
 
     @Id
-    private BigInteger id;
+    private long id;
 
     private String firstName;
 
     private String lastName;
 
-    private LocalDateTime birthDt;
+    private LocalDateTime birth_dt;
 
     private int age;
 
     private char sex;
 
-    private Contact contactId;
+    private long contact_id;
 
-    private MedicalCard medicalCardId;
+    private long medical_card_id;
 
-    private PersonData parentId;
+    private long parent_id;
 
 }
