@@ -1,7 +1,6 @@
 package liga.medical.medicalpersonservice.core.model;
 
 
-import java.math.BigInteger;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -9,12 +8,12 @@ import org.springframework.data.annotation.Id;
 public class Contact {
 
     @Id
-    private BigInteger id;
+    private long id;
 
-    private String phoneNumber;
+    private String phone_number;
 
     private String email;
 
-    private String profileLink;
+    private String profile_link;
 
 }

@@ -8,13 +8,13 @@ import org.springframework.data.annotation.Id;
 public class MedicalCard {
 
     @Id
-    private MedicalCard id;
+    private long id;
 
-    private char clientStatus;
+    private char client_status;
 
-    private char medStatus;
+    private char med_status;
 
-    private LocalDateTime registryDt;
+    private LocalDateTime registry_dt;
 
     private String comment;
 

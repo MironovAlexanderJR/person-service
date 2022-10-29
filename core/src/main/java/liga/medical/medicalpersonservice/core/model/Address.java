@@ -1,6 +1,5 @@
 package liga.medical.medicalpersonservice.core.model;
 
-import java.math.BigInteger;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -8,15 +7,15 @@ import org.springframework.data.annotation.Id;
 public class Address {
 
     @Id
-    private BigInteger id;
+    private long id;
 
-    private Contact contactId;
+    private long contact_id;
 
-    private BigInteger countryId;
+    private long country_id;
 
     private String city;
 
-    private Integer index;
+    private int index;
 
     private String street;
 

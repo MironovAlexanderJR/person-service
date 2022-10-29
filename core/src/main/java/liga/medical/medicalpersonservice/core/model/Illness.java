@@ -1,9 +1,7 @@
 package liga.medical.medicalpersonservice.core.model;
 
-import java.math.BigInteger;
 import java.sql.Time;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -11,16 +9,16 @@ import org.springframework.data.annotation.Id;
 public class Illness {
 
     @Id
-    private BigInteger id;
+    private long id;
 
-    private MedicalCard medicalCardId;
+    private MedicalCard medical_card_id;
 
-    private BigInteger typeId;
+    private long type_id;
 
     private char heaviness;
 
-    private Time appearanceDttm;
+    private Time appearance_dttm;
 
-    private LocalDateTime recoveryDt;
+    private LocalDateTime recovery_dt;
 
 }
