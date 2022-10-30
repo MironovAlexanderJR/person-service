@@ -17,7 +17,7 @@ public interface AddressMapper {
     Address getAddressById(@Param("id") long id);
 
     @Select("select * from address where contact_id = #{contact_id}")
-    Address getAddressByContactId(@Param("contactId") long contactId);
+    Address getAddressByContactId(@Param("contact_id") long contact_id);
 
     @Insert("insert into address (contact_id, country_id, city, index, street, building, flat)" +
             " values(#{contact_id}, #{country_id}, #{city}, #{index}, #{street}, #{building}, #{flat})")

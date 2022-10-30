@@ -1,0 +1,27 @@
+### register user (not confirmed) (all)
+POST http://localhost:8080/api/signUp
+Content-Type: application/json
+
+{
+  "name" : "name",
+  "email" : "user@mail.ru",
+  "password" : "qwerty228"
+}
+
+### user/admin confirmation (all)
+
+POST http://localhost:8080/api/confirmation/user@mail.ru
+
+### login and get token (all)
+
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email": "user@mail.ru",
+  "password": "qwerty228"
+}
+### check token and health (ADMIN)
+
+GET http://localhost:8080/actuator/health
+Authorization: Bearer 242cadbe-33c6-4c68-97e3-3fc8f31d6a9e

@@ -1,6 +1,5 @@
 package liga.medical.medicalpersonservice.core.controller;
 
-import java.math.BigInteger;
 import java.util.List;
 import liga.medical.medicalpersonservice.core.model.Address;
 import liga.medical.medicalpersonservice.core.service.AddressService;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/addresses")
+@RequestMapping("/api/addresses")
 public class AddressController {
 
     private final AddressService addressService;
@@ -29,7 +28,7 @@ public class AddressController {
         return addressService.getAddressById(addressId);
     }
 
-    @GetMapping("{/contactId}")
+    @GetMapping("contacts/{contactId}")
     public Address getAddressByContactId(@PathVariable long contactId) {
         return addressService.getAddressByContactId(contactId);
     }

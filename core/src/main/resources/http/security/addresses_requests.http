@@ -1,0 +1,28 @@
+### get all addresses (USER)
+GET http://localhost:8080/api/addresses
+Authorization: Bearer 242cadbe-33c6-4c68-97e3-3fc8f31d6a9e
+
+### get address by id (USER)
+GET http://localhost:8080/api/addresses/1
+Authorization: Bearer 242cadbe-33c6-4c68-97e3-3fc8f31d6a9e
+
+### get address by contact id (USER)
+GET http://localhost:8080/api/addresses/contacts/1
+Authorization: Bearer 242cadbe-33c6-4c68-97e3-3fc8f31d6a9e
+
+### add new adresses (ADMIN)
+POST http://localhost:8080/api/addresses
+Content-Type: application/json
+Authorization: Bearer 242cadbe-33c6-4c68-97e3-3fc8f31d6a9e
+
+{
+  "contact_id": 1,
+  "country_id": 0,
+  "city": "Mary",
+  "index": 745400,
+  "street": "Centrally",
+  "building": "3",
+  "flat": "1"
+}
+
+

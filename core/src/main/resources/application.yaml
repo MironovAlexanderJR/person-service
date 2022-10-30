@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${POSTGRES_DB_URL}
-    username: ${POSTGRES_DB_USERNAME}
-    password: ${POSTGRES_DB_PASSWORD}
+    url: ${POSTGRES_DB_URL:jdbc:postgresql://localhost:5432/medical}
+    username: ${POSTGRES_DB_USERNAME:postgres}
+    password: ${POSTGRES_DB_PASSWORD:12212332}
     driver-class-name: org.postgresql.Driver
 #    initialization-mode: always
 #    schema: classpath:init/schema.sql
