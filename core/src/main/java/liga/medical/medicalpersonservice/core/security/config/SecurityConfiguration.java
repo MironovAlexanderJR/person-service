@@ -5,6 +5,7 @@ import liga.medical.medicalpersonservice.core.mapper.AccountMapper;
 import liga.medical.medicalpersonservice.core.model.Role;
 import liga.medical.medicalpersonservice.core.security.filters.TokenAuthenticationFilter;
 import liga.medical.medicalpersonservice.core.security.filters.TokenAuthorizationFilter;
+import liga.medical.medicalpersonservice.core.util.LoggingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -39,6 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccountMapper accountMapper;
 
+    @Autowired
+    private LoggingUtils loggingUtils;
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -53,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         TokenAuthenticationFilter tokenAuthenticationFilter = new TokenAuthenticationFilter(authenticationManager(),
-                objectMapper, accountMapper);
+                loggingUtils, objectMapper, accountMapper);
         tokenAuthenticationFilter.setFilterProcessesUrl(LOGIN_FILTER_PROCESSES_URL);
 
         http.csrf().disable();

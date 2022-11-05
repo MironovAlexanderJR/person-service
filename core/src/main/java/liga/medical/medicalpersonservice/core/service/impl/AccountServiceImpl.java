@@ -35,4 +35,5 @@ public class AccountServiceImpl implements AccountService {
         String state = State.CONFIRMED.toString();
         accountMapper.confirmationByEmail(state, email);
     }
+
 }

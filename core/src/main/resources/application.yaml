@@ -13,5 +13,10 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog.xml
     enabled: ${LIQUIBASE_ENABLE:false}
+  main:
+    banner-mode: log
+logging:
+  file:
+    name: person-service.log
 
 
