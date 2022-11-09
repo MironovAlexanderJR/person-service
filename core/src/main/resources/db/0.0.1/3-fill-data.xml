@@ -167,6 +167,31 @@
             <column name="parent_id" value="1"/>
         </insert>
 
+
+<!--        <insert tableName="signal">-->
+<!--            <column name="description" value="description"/>-->
+<!--            <column name="type" value="DAILY"/>-->
+<!--            <column name="person_data_id" value="1"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="signal">-->
+<!--            <column name="description" value="description"/>-->
+<!--            <column name="type" value="DAILY"/>-->
+<!--            <column name="person_data_id" value="2"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="signal">-->
+<!--            <column name="description" value="description"/>-->
+<!--            <column name="type" value="DAILY"/>-->
+<!--            <column name="person_data_id" value="3"/>-->
+<!--        </insert>-->
+
+<!--        <insert tableName="signal">-->
+<!--            <column name="description" value="description"/>-->
+<!--            <column name="type" value="ALERT"/>-->
+<!--            <column name="person_data_id" value="4"/>-->
+<!--        </insert>-->
+
     </changeSet>
 
 </databaseChangeLog>

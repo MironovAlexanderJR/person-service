@@ -35,6 +35,12 @@
                                  constraintName="medical_card_id_fq"
                                  referencedTableName="contact"
                                  referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="signal"
+                                 baseColumnNames="person_data_id"
+                                 constraintName="person_data_id_fq"
+                                 referencedTableName="person_data"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
 

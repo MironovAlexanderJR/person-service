@@ -1,12 +1,15 @@
 package liga.medical.medicalpersonservice.core.service.impl;
 
-import liga.medical.medicalpersonservice.core.dto.SignUpForm;
-import liga.medical.medicalpersonservice.core.mapper.AccountMapper;
+import java.util.Optional;
+import javax.transaction.Transactional;
+import liga.medical.medicalpersonservice.core.model.dto.SignUpForm;
 import liga.medical.medicalpersonservice.core.model.Account;
 import liga.medical.medicalpersonservice.core.model.Role;
 import liga.medical.medicalpersonservice.core.model.State;
+import liga.medical.medicalpersonservice.core.repository.AccountRepository;
 import liga.medical.medicalpersonservice.core.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +18,34 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
 
     private final PasswordEncoder passwordEncoder;
-    private final AccountMapper accountMapper;
+    private final AccountRepository accountRepository;
 
     @Override
+    @Transactional
     public void createAccount(SignUpForm signUpForm) {
-        Account account = Account.builder()
-                .name(signUpForm.getName())
-                .email(signUpForm.getEmail())
-                .password(passwordEncoder.encode(signUpForm.getPassword()))
-                .role(Role.USER)
-                .state(State.NOT_CONFIRMED)
-                .build();
 
-        accountMapper.createAccount(account);
+        Account account = new Account();
+        account.setName(signUpForm.getName());
+        account.setEmail(signUpForm.getEmail());
+        account.setPassword(passwordEncoder.encode(signUpForm.getPassword()));
+        account.setRole(Role.USER);
+        account.setState(State.CONFIRMED);
+
+        accountRepository.save(account);
     }
 
     @Override
-    public void confirmationByEmail(String email) {
-        String state = State.CONFIRMED.toString();
-        accountMapper.confirmationByEmail(state, email);
+    @Transactional
+    public void updateTokenByEmail(String token, String email) {
+        Account account = accountRepository.getByEmail(email);
+        Account secondAccount = accountRepository.getById(account.getId());
+        secondAccount.setToken(token);
+        accountRepository.save(secondAccount);
+    }
+
+    @Override
+    public Optional<Account> findByToken(String token) {
+        return accountRepository.findByToken(token);
     }
 
 }

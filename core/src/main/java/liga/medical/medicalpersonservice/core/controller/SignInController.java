@@ -2,7 +2,7 @@ package liga.medical.medicalpersonservice.core.controller;
 
 import io.swagger.annotations.Api;
 import javax.validation.Valid;
-import liga.medical.medicalpersonservice.core.dto.SignUpForm;
+import liga.medical.medicalpersonservice.core.model.dto.SignUpForm;
 import liga.medical.medicalpersonservice.core.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

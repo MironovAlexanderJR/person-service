@@ -1,11 +1,10 @@
 package liga.medical.medicalpersonservice.core.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import liga.medical.medicalpersonservice.core.mapper.AccountMapper;
 import liga.medical.medicalpersonservice.core.model.Role;
 import liga.medical.medicalpersonservice.core.security.filters.TokenAuthenticationFilter;
 import liga.medical.medicalpersonservice.core.security.filters.TokenAuthorizationFilter;
-import liga.medical.medicalpersonservice.core.util.LoggingUtils;
+import liga.medical.medicalpersonservice.core.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -25,6 +24,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public static final String API = "/api";
     public static final String LOGIN_FILTER_PROCESSES_URL = API + "/login";
     private static final String ADDRESS_API = API + "/addresses";
+    private static final String CONTACT_API = API + "/contacts";
+    private static final String ILLNESSES_API = API + "/illnesses";
+    private static final String MEDICAL_CARD_API = API + "/medical-cards";
+    private static final String PERSON_DATA_API = API + "/person-dates";
+    private static final String SIGNAL_API = API + "/signals";
     private static final String ADMIN = Role.ADMIN.toString();
     private static final String USER = Role.USER.toString();
 
@@ -38,10 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserDetailsService accountUserDetailsService;
 
     @Autowired
-    private AccountMapper accountMapper;
-
-    @Autowired
-    private LoggingUtils loggingUtils;
+    private AccountService accountService;
 
     @Bean
     @Override
@@ -57,19 +58,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         TokenAuthenticationFilter tokenAuthenticationFilter = new TokenAuthenticationFilter(authenticationManager(),
-                loggingUtils, objectMapper, accountMapper);
+                objectMapper, accountService);
         tokenAuthenticationFilter.setFilterProcessesUrl(LOGIN_FILTER_PROCESSES_URL);
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(tokenAuthenticationFilter);
-        http.addFilterBefore(new TokenAuthorizationFilter(accountMapper, objectMapper),
+        http.addFilterBefore(new TokenAuthorizationFilter(objectMapper, accountService),
                 UsernamePasswordAuthenticationFilter.class);
         
         http.authorizeRequests()
                 .antMatchers("/api/login/**").permitAll()
                 .antMatchers("api/signUp/**").permitAll()
                 .antMatchers(HttpMethod.GET, ADDRESS_API).hasAuthority(USER)
+                .antMatchers(HttpMethod.GET, CONTACT_API).hasAuthority(USER)
+                .antMatchers(HttpMethod.GET, ILLNESSES_API).hasAuthority(USER)
+                .antMatchers(HttpMethod.GET, MEDICAL_CARD_API).hasAuthority(USER)
+                .antMatchers(HttpMethod.GET, PERSON_DATA_API).hasAuthority(USER)
+                .antMatchers(HttpMethod.GET, ILLNESSES_API).hasAuthority(USER)
+                .antMatchers(HttpMethod.GET, SIGNAL_API).hasAuthority(USER)
                 .antMatchers(HttpMethod.POST, ADDRESS_API).hasAuthority(ADMIN)
                 .antMatchers("/actuator/**").hasAuthority(ADMIN);
 

@@ -1,22 +1,36 @@
 spring:
+  application:
+    name: person-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   datasource:
     url: ${POSTGRES_DB_URL:jdbc:postgresql://localhost:5432/medical}
     username: ${POSTGRES_DB_USERNAME:postgres}
     password: ${POSTGRES_DB_PASSWORD:12212332}
     driver-class-name: org.postgresql.Driver
-#    initialization-mode: always
-#    schema: classpath:init/schema.sql
-#    data: classpath:init/data.sql
   jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     hibernate:
       ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  main:
+    banner-mode: log
   liquibase:
     change-log: classpath:/db/changelog.xml
     enabled: ${LIQUIBASE_ENABLE:false}
-  main:
-    banner-mode: log
 logging:
   file:
     name: person-service.log
-
-
+server:
+  port: 0
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}

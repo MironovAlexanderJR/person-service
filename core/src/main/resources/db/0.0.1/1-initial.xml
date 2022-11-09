@@ -36,7 +36,6 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-<!--            Зависимость-->
             <column name="medical_card_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -52,7 +51,6 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-<!--            Зависимость-->
             <column name="contact_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -89,17 +87,24 @@
             <column name="sex" type="CHAR">
                 <constraints nullable="false"/>
             </column>
-            <!--            Зависимость-->
             <column name="contact_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <!--            Зависимость-->
             <column name="medical_card_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <!--            Зависимость-->
-            <!--            Проверка-->
             <column name="parent_id" type="BIGINT"/>
+        </createTable>
+
+        <createTable tableName="signal">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="person_data_id" type="BIGINT">
+<!--                <constraints unique="true"/>-->
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import liga.medical.medicalpersonservice.core.mapper.AccountMapper;
 import liga.medical.medicalpersonservice.core.model.Account;
+import liga.medical.medicalpersonservice.core.repository.AccountRepository;
 import liga.medical.medicalpersonservice.core.security.config.SecurityConfiguration;
 import liga.medical.medicalpersonservice.core.security.details.AccountUserDetails;
+import liga.medical.medicalpersonservice.core.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,8 +23,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class TokenAuthorizationFilter extends OncePerRequestFilter {
 
-    private final AccountMapper accountMapper;
     private final ObjectMapper objectMapper;
+    private final AccountService accountService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -32,7 +34,7 @@ public class TokenAuthorizationFilter extends OncePerRequestFilter {
             String tokenHeader = request.getHeader("Authorization");
             if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
                 String token = tokenHeader.substring("Bearer ".length());
-                Optional<Account> account = accountMapper.findByToken(token);
+                Optional<Account> account = accountService.findByToken(token);
 
                 if (account.isPresent()) {
                     AccountUserDetails userDetails = new AccountUserDetails(account.get());

@@ -1,25 +1,15 @@
 package liga.medical.medicalpersonservice.core.mapper;
 
-import java.util.List;
 import liga.medical.medicalpersonservice.core.model.Address;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 @Mapper
 public interface AddressMapper {
 
-    @Select("select * from address")
-    List<Address> getAllAddresses();
-
-    @Select("select * from address where id = #{id}")
-    Address getAddressById(@Param("id") long id);
-
-    @Select("select * from address where contact_id = #{contact_id}")
-    Address getAddressByContactId(@Param("contact_id") long contact_id);
-
-    @Insert("insert into address (contact_id, country_id, city, index, street, building, flat)" +
-            " values(#{contact_id}, #{country_id}, #{city}, #{index}, #{street}, #{building}, #{flat})")
-    void insertAddress(Address address);
+    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
+    Address merge(@MappingTarget Address target, Address source);
 }

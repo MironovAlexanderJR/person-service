@@ -1,39 +1,34 @@
 package liga.medical.medicalpersonservice.core.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import lombok.AllArgsConstructor;
+import javax.persistence.ManyToOne;
+import liga.medical.commondto.Type;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Address {
+public class Signal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "contact_id")
-    private Contact contactId;
+    @ManyToOne
+    @JoinColumn(name = "person_data_id")
+    private PersonData PersonDataId;
 
-    private long countryId;
+    private String description;
 
-    private String city;
-
-    private int index;
-
-    private String street;
-
-    private String building;
-
-    private String flat;
-
+    @Enumerated(STRING)
+    private Type type;
 }

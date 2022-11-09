@@ -13,4 +13,5 @@ public interface AddressService {
 
     void insertAddress(Address address);
 
+    void updateContact(Long id, Address address);
 }

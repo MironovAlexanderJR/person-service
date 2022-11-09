@@ -4,9 +4,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import liga.medical.medicalpersonservice.core.model.Address;
+import liga.medical.medicalpersonservice.core.model.Contact;
 import liga.medical.medicalpersonservice.core.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +45,12 @@ public class AddressController {
     @PostMapping
     public void insertAddress(@RequestBody Address address) {
         addressService.insertAddress(address);
+    }
+
+    @ApiOperation(value = "Обновление адреса")
+    @PatchMapping("/{id}")
+    public void updateAddress(@PathVariable Long id, @RequestBody Address address) {
+        addressService.updateContact(id, address);
     }
 
 }

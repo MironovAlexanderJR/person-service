@@ -1,4 +1,4 @@
-package liga.medical.medicalpersonservice.core.dto;
+package liga.medical.medicalpersonservice.core.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
